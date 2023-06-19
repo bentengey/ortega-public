@@ -16,23 +16,26 @@ export default async function handler(req, res) {
         },
       });
 
-      const emailContent = `
-        Name: ${bookingData.name}
-        Nationality: ${bookingData.nationality}
-        Number of People: ${bookingData.numberOfPeople}
-        Reason for Travel: ${bookingData.reasonForTravel}
-        Luggage: ${bookingData.luggage}
-        Arrival Time: ${bookingData.arrivalTime}
-        Transportation Mode: ${bookingData.transportationMode}
-      `;
+   const emailContent = `
+  New Customer for Mr. Ortega
 
-      const mailOptions = {
-        from: process.env.ZOHO_MAIL_USERNAME,
-        to: process.env.YOUR_EMAIL,
-        cc: process.env.FRIEND_EMAIL,
-        subject: 'New Booking',
-        text: emailContent,
-      };
+  Name: ${bookingData.name}
+  Nationality: ${bookingData.nationality}
+  Number of People: ${bookingData.numberOfPeople}
+  Reason for Travel: ${bookingData.reasonForTravel}
+  Luggage: ${bookingData.luggage}
+  Arrival Time: ${bookingData.arrivalTime}
+  Transportation Mode: ${bookingData.transportationMode}
+`;
+
+const mailOptions = {
+  from: process.env.ZOHO_MAIL_USERNAME,
+  to: process.env.YOUR_EMAIL,
+  cc: process.env.FRIEND_EMAIL,
+  subject: 'New Booking - Ortega',
+  text: emailContent,
+};
+
 
       await transporter.sendMail(mailOptions);
 
