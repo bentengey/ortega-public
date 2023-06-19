@@ -139,7 +139,7 @@ const handleChange = (event: { target: { name: string; value: string } }) => {
        {showBookingForm && (
   <div  className="mt-10">
     <h2 className="text-2xl font-bold mb-4">Booking Form</h2>
- <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleBooking}>
+ <form className="flex flex-col flex-wrap gap-4" onSubmit={handleBooking}>
 
       <div className="flex flex-col">
   <label htmlFor="name" className="mb-2 text-lg">
