@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       const transporter = nodemailer.createTransport({
         host: process.env.ZOHO_MAIL_HOST,
         port: process.env.ZOHO_MAIL_PORT,
-        secure: true,
+        secure: false,
         auth: {
           user: process.env.ZOHO_MAIL_USERNAME,
           pass: process.env.ZOHO_MAIL_PASSWORD,
