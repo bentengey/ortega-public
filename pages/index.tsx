@@ -139,7 +139,8 @@ const handleChange = (event: { target: { name: string; value: string } }) => {
        {showBookingForm && (
   <div  className="mt-10">
     <h2 className="text-2xl font-bold mb-4">Booking Form</h2>
-    <form className="grid grid-cols-2 gap-10" onSubmit={handleBooking}>
+ <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleBooking}>
+
       <div className="flex flex-col">
   <label htmlFor="name" className="mb-2 text-lg">
     Name:
@@ -194,10 +195,11 @@ const handleChange = (event: { target: { name: string; value: string } }) => {
   />
 </div>
 
-              <div>
-                <label htmlFor="reasonForTravel">Reason for Travel:</label>
+              <div className="flex flex-col">
+                <label className="mb-2 text-lg" htmlFor="reasonForTravel">Reason for Travel:</label>
                 <input
-                 className='text-gray-800'
+                  className="text-gray-800 text-sm rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      placeholder='What is the purpose pf your travel'
                   type="text"
                   id="reasonForTravel"
                   name="reasonForTravel"
@@ -206,23 +208,29 @@ const handleChange = (event: { target: { name: string; value: string } }) => {
                   required
                 />
               </div>
-              <div>
-                <label htmlFor="luggage">Luggage Amount and Size:</label>
+
+
+              <div className="flex flex-col">
+                <label className="mb-2 text-lg" htmlFor="luggage">Luggage Amount and Size:</label>
                 <input
                   type="text"
                   id="luggage"
-                   className='text-gray-800'
+                    className="text-gray-800 text-sm rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      placeholder='What many bags do you have in total?'
                   name="luggage"
                   value={bookingData.luggage}
                   onChange={handleInputChange}
                   required
                 />
               </div>
-              <div>
-                <label htmlFor="arrivalTime">Time of Arrival:</label>
+
+
+              <div className="flex flex-col">
+                <label className="mb-2 text-lg" htmlFor="arrivalTime">Time of Arrival:</label>
                 <input
                   type="text"
-                   className='text-gray-800'
+                   className="text-gray-800 text-sm rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      placeholder='What is your expected time of arrival?'
                   id="arrivalTime"
                   name="arrivalTime"
                   value={bookingData.arrivalTime}
@@ -230,11 +238,14 @@ const handleChange = (event: { target: { name: string; value: string } }) => {
                   required
                 />
               </div>
-              <div>
-                <label htmlFor="transportationMode">Mode of Transportation:</label>
+
+
+              <div className="flex flex-col">
+                <label className="mb-2 text-lg" htmlFor="transportationMode">Mode of Transportation:</label>
                 <input
                   type="text"
-                   className='text-gray-800'
+                    className="text-gray-800 text-sm rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder='What mode of transport are you using?'
                   id="transportationMode"
                   name="transportationMode"
                   value={bookingData.transportationMode}
@@ -242,6 +253,8 @@ const handleChange = (event: { target: { name: string; value: string } }) => {
                   required
                 />
               </div>
+
+
       <div className="col-span-2">
         <button
           className="bg-pink-500 text-white px-4 py-2 rounded-lg"
