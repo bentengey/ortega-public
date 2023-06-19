@@ -1,118 +1,292 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { useState, ChangeEvent, FormEvent } from 'react';
+import PeopleCounter from '../components/PeopleCounter';
+import EarningsCalculator from '../components/EarningsCalculator';
+import axios from 'axios';
+import { FaWhatsapp } from 'react-icons/fa';
+import Link from 'next/link';
 
-const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
-  return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+interface BookingData {
+  name: string;
+  nationality: string;
+  numberOfPeople: string;
+  reasonForTravel: string;
+  luggage: string;
+  arrivalTime: string;
+  transportationMode: string;
 }
+
+const HomePage = () => {
+  const [bookingData, setBookingData] = useState<BookingData>({
+    name: '',
+    nationality: '',
+    numberOfPeople: '',
+    reasonForTravel: '',
+    luggage: '',
+    arrivalTime: '',
+    transportationMode: '',
+  });
+
+  const [showBookingForm, setShowBookingForm] = useState(false);
+
+  const [shareUrl, setShareUrl] = useState('');
+
+const [sending, setSending] = useState(false);
+const [showSuccess, setShowSuccess] = useState(false);
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setBookingData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+
+const handleBooking = async (event: { preventDefault: () => void }) => {
+  event.preventDefault();
+  setSending(true); // Set sending state of the button
+
+  try {
+    // Send email using backend API
+    await axios.post('/api/bookings', bookingData);
+
+    // Generate the URL for sharing via WhatsApp
+    const { name } = bookingData;
+    const emailContent = `Hello Ortega, my name is ${name} and here are our booking details:
+      
+    Name: ${bookingData.name}
+    Nationality: ${bookingData.nationality}
+    Number of People: ${bookingData.numberOfPeople}
+    Reason for Travel: ${bookingData.reasonForTravel}
+    Luggage: ${bookingData.luggage}
+    Arrival Time: ${bookingData.arrivalTime}
+    Transportation Mode: ${bookingData.transportationMode}`;
+
+    const shareUrl = `https://api.whatsapp.com/send?phone=+233594893946&text=${encodeURIComponent(
+      emailContent
+    )}`;
+
+    // Show success message and WhatsApp share option
+    setShowSuccess(true);
+    setShareUrl(shareUrl);
+    setShowBookingForm(false); // Hide the booking form
+  } catch (error) {
+    console.error('Failed to send booking details:', error);
+  } finally {
+    setSending(false); // Reset sending state of the button
+  }
+};
+
+
+const handleChange = (event: { target: { name: string; value: string } }) => {
+  const { name, value } = event.target;
+  setBookingData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
+
+
+  const handleMakeBookingClick = () => {
+    setShowBookingForm(true);
+  };
+
+  return (
+    <div className="max-w-7xl mx-auto">
+      {/* Header */}
+      <header className="mb-10 py-4 px-8 border-b">
+        <div className="flex items-center justify-between">
+          <h1 className="text-white text-2xl font-bold">Ortega</h1>
+          <nav>
+            <ul className="flex space-x-4">
+              <li>
+                <Link className="text-pink-300 hover:text-pink-300 transition-colors" href="/">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link className="text-white hover:text-pink-300 transition-colors" href="/about">
+                  About
+                </Link>
+              </li>
+         
+            </ul>
+          </nav>
+        </div>
+      </header>
+      {/* Main content */}
+      <div className="min-h-screen p-8">
+        <h1 className="text-4xl font-bold mb-4">Border Crossing Assistance in Aflao</h1>
+        <div className="flex">
+          <p className="mb-8">
+            Welcome to Aflao! My name is Ortega, and I&apos;m here to provide assistance for crossing the border between
+            Ghana and Togo. I ensure that your border crossings are done legally and efficiently. Whether youre a
+            traveler, a trader, or a visitor, I will guide you through the process, making sure you have a smooth and
+            hassle-free experience. Contact me today, and let&apos;s make your border crossing a stress-free endeavor!
+          </p>
+          <div>
+          </div>
+        </div>
+        <PeopleCounter />
+        <EarningsCalculator />
+        <div id="booking" className="mt-10">
+          <button
+            className="bg-sky-700 border px-8 max-w-xs py-3 rounded-lg cursor-pointer"
+            onClick={handleMakeBookingClick}
+          >
+            Make Booking
+          </button>
+        </div>
+
+        {/* Booking Form */}
+       {showBookingForm && (
+  <div  className="mt-10">
+    <h2 className="text-2xl font-bold mb-4">Booking Form</h2>
+    <form className="grid grid-cols-2 gap-10" onSubmit={handleBooking}>
+      <div className="flex flex-col">
+  <label htmlFor="name" className="mb-2 text-lg">
+    Name:
+  </label>
+  <input
+    className="text-gray-800 text-sm rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    type="text"
+    placeholder="Insert Your Name"
+    id="name"
+    name="name"
+    value={bookingData.name}
+    onChange={handleInputChange}
+    required
+  />
+</div>
+
+
+
+
+     <div className="flex flex-col ">
+  <label htmlFor="nationality" className="mb-2 text-lg">
+    Nationality:
+  </label>
+  <input
+  placeholder='What is your Nationality?'
+    type="text"
+    className="text-gray-800 text-sm rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    id="nationality"
+    name="nationality"
+    value={bookingData.nationality}
+    onChange={handleInputChange}
+    required
+  />
+</div>
+
+
+
+
+          <div className="flex flex-col">
+  <label htmlFor="numberOfPeople" className="mb-2 text-lg">
+    Number of People:
+  </label>
+  <input
+    type="number"
+    className="text-gray-800 text-sm rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    id="numberOfPeople"
+    placeholder='How many are you?'
+    name="numberOfPeople"
+    value={bookingData.numberOfPeople}
+    onChange={handleInputChange}
+    required
+  />
+</div>
+
+              <div>
+                <label htmlFor="reasonForTravel">Reason for Travel:</label>
+                <input
+                 className='text-gray-800'
+                  type="text"
+                  id="reasonForTravel"
+                  name="reasonForTravel"
+                  value={bookingData.reasonForTravel}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="luggage">Luggage Amount and Size:</label>
+                <input
+                  type="text"
+                  id="luggage"
+                   className='text-gray-800'
+                  name="luggage"
+                  value={bookingData.luggage}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="arrivalTime">Time of Arrival:</label>
+                <input
+                  type="text"
+                   className='text-gray-800'
+                  id="arrivalTime"
+                  name="arrivalTime"
+                  value={bookingData.arrivalTime}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="transportationMode">Mode of Transportation:</label>
+                <input
+                  type="text"
+                   className='text-gray-800'
+                  id="transportationMode"
+                  name="transportationMode"
+                  value={bookingData.transportationMode}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+      <div className="col-span-2">
+        <button
+          className="bg-pink-500 text-white px-4 py-2 rounded-lg"
+          type="submit"
+          disabled={sending}
+        >
+            {sending ? 'Sending...' : showSuccess ? 'Sent' : 'Confirm Booking'}
+        </button>
+      </div>
+    </form>
+  </div>
+)}
+
+{showSuccess && (
+  <div className="mt-4">
+    <p className="text-green-300">Your booking is successful!<span></span></p>
+   
+ <a className='flex items-center gap-2 mt-4 animate-pulse' href={shareUrl.toString()} target="_blank" rel="noopener noreferrer">
+ <div style={{ fontSize: '1.5rem' }}>
+      <FaWhatsapp />
+    </div> Click to chat me up on WhatsApp 
+</a>
+
+  </div>
+)}
+      </div>
+{/* Footer */}
+<footer className="mb-10 py-4 px-8 border-t border-sky-500">
+  <div className="flex items-center justify-between">
+    <div className=''>
+  <h1 className="text-white text-2xl font-bold">Ortega</h1>
+          <p className="text-xs">All Rights Reserved &copy; 2023</p>
+
+    </div>
+  
+    <nav>
+      <p className="text-sm">Email: <a href="mailto:benortega234@gmail.com">benortega234@gmail.com</a></p>
+      <p className="text-sm">Contact: <a href="tel:+233594893946">+233 (0) 594 893 946</a></p>
+    </nav>
+  </div>
+</footer>
+
+
+    </div>
+  );
+};
+
+export default HomePage;
